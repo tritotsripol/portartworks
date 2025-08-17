@@ -1,0 +1,100 @@
+body { 
+  font-family: 'IBM Plex Sans Thai Looped';
+  margin: 0px;
+  background-color: #f5ffff;
+  color: #00512b;
+}
+.header {
+  background: linear-gradient(to right, #00de75, #00c9fd);
+  padding: 5px;
+  padding-left: 25px;
+  color: white;
+  font-size: 36px;
+  line-height: 15px;
+}
+.web {
+  margin: 10px;
+}
+.filter {
+  background: linear-gradient(to right, #00de75, #00c9fd);
+  padding: 15px;
+  width: max-content;
+  justify-self: center;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 20px;
+}
+.checkbox input {
+  display: none;
+}
+.checkbox .checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #00de75;
+  width: 0px;
+  height: 0px;
+  border-radius: 3px;
+  opacity: 0;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+.checkbox input:checked + .checkmark::after {
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+}
+
+
+
+.gallery { 
+    column-count: 4;
+    column-gap: 10px;
+  }
+.item { 
+  border: 1px solid #00de7580; 
+  border-radius: 25px;
+  padding: 10px;
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+.item img { 
+  display: block; 
+  border-radius: 15px;
+  width: 100%;
+}
+.caption {
+  font-size: 18px;
+}
+.cat {
+  background: linear-gradient(to right, #00de75, #00c9fd);
+  padding: 5px;
+  border-radius: 25px;
+  color: white;
+}
+
+
+@media (max-width: 769px) {
+  .gallery { 
+    column-count: 2;
+    column-gap: 10px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gallery { 
+    column-count: 3;
+    column-gap: 10px;
+  }
+}
