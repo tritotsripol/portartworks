@@ -12,18 +12,31 @@ body {
   font-size: 36px;
   line-height: 15px;
 }
+.header > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
 .web {
   margin: 10px;
 }
 .filter {
+  display: flex;
+  flex-wrap: wrap;
   background: linear-gradient(to right, #00de75, #00c9fd);
   padding: 15px;
-  width: max-content;
-  justify-self: center;
+  justify-content: center;
   border-radius: 25px;
   margin-bottom: 10px;
   color: white;
   font-size: 20px;
+  gap: 10px;
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .checkbox input {
   display: none;
@@ -49,7 +62,7 @@ body {
   height: 0px;
   border-radius: 3px;
   opacity: 0;
-  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
 }
 .checkbox input:checked + .checkmark::after {
   opacity: 1;
@@ -69,6 +82,14 @@ body {
   padding: 10px;
   break-inside: avoid;
   margin-bottom: 10px;
+  color: #00512b;
+  scale: 1;
+  transition: border 0.25s ease, color 0.25s ease, scale 0.25s ease;
+}
+.item:hover {
+  border: 1px solid #00c9fd80;
+  color: #006781;
+  scale: 1.01;
 }
 .item img { 
   display: block; 
@@ -83,6 +104,9 @@ body {
   padding: 5px;
   border-radius: 25px;
   color: white;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.25s ease;
 }
 
 
@@ -91,6 +115,11 @@ body {
     column-count: 2;
     column-gap: 10px;
   }
+  .header > div {
+  display: grid;
+  grid-template-rows: repeat(2,25%);
+  align-content: center;
+}
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .gallery { 
