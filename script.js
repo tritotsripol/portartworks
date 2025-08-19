@@ -1,3 +1,11 @@
+const gotop = document.querySelector('.gotop');
+gotop.addEventListener('click',function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+});
+
 const sheetID = "17lmRDtyNAAO5by06d3jujobKKpe4M11qxwziiXNPwqs"; 
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
 
