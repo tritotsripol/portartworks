@@ -22,7 +22,7 @@ fetch(url)
       const image = r.c[0].v;
       const caption = r.c[r.c.length-1].v;
 
-      const catColumns = [1,2,3,4,5,6];
+      const catColumns = [1,2,3,4,5,6,7,8,9,10];
       const allCats = catColumns.flatMap(i => {
         const val = r.c[i] ? r.c[i].v : "";
         return val && val !== "-" ? val.split(",").map(s => s.trim()) : [];
@@ -34,9 +34,22 @@ fetch(url)
       div.className = "item";
       div.setAttribute("data-cat", allCats.join("|"));
 
+      let mediaHTML;
+      if (image.endsWith(".mp4")){
+        mediaHTML = `
+          <video controls width="100%" style="border-radius:15px">
+            <source src="${image}" type="video/mp4">
+          </video>
+        `;
+      } else {
+        mediaHTML = `
+          <img src="${image}">
+        `;
+      }
+
       div.innerHTML = `
         <a href="${image}" data-fancybox="gallery">
-          <img src="${image}">
+          ${mediaHTML}
         </a><br>
         ${allCats.map(cat => `<small class="cat">${cat}</small>`).join("&nbsp;&nbsp;")}
         <p class="caption">${caption}</p>
