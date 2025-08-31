@@ -19,6 +19,16 @@ body {
   gap: 15px;
   flex-wrap: wrap;
 }
+a {
+  color: darkslateblue;
+  font-weight: normal;
+  transition: opacity 0.1s ease, font-weight 0.1s ease;
+}
+a:hover {
+  font-weight: bold; 
+}
+
+
 .web {
   margin: 10px;
 }
@@ -122,26 +132,30 @@ body::-webkit-scrollbar-track {
 }
 
 
-
-.gotop {
-  width: 5em;
-  height: 5em;
-  border-radius: 25px;
-  border: none;
+.buttons {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  cursor: pointer;
-  background: linear-gradient(to right, #00de75, #00c9fd);
-  transition: width 0.25s ease, height 0.25s ease;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
 }
-.gotop:hover {
-  width: 5.25em;
-  height: 5.25em;
-}
-.gotop::before {
-  background-color: white;
+.gotop, .themebtn {
+  width: 4em;
+  height: 4em;
   border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transform: scale(1);
+  background: linear-gradient(to right, #00de75, #00c9fd);
+  transition: transform 0.25s ease;
+}
+.gotop:hover, .themebtn:hover {
+  transform: scale(1.125);
+}
+.gotop::before, .themebtn::before {
+  background-color: white;
+  border-radius: 10px;
   content: "";
   position: absolute;
   top: 50%;
@@ -150,13 +164,13 @@ body::-webkit-scrollbar-track {
   width: 0px;
   height: 0px;
   opacity: 25%;
-  transition: width 0.25s ease, height 0.25s ease;
+  
 }
-.gotop:hover::before {
+.gotop:hover::before, .themebtn:hover::before {
   width: 75%;
   height: 75%;
 }
-.uppy {
+.uppy, .themeicon{
   filter: invert(1);
 }
 
@@ -177,4 +191,20 @@ body::-webkit-scrollbar-track {
     column-count: 3;
     column-gap: 10px;
   }
+}
+
+body.dark { 
+  background-color: #080b0b;
+}
+body.dark .item { 
+  border: 1px solid #00de7580; 
+  color: #c0ffe8;
+}
+body.dark a { 
+  color: rgb(167, 154, 255);
+}
+body.dark .item:hover {
+  border: 1px solid #00c9fd80;
+  color: #bdf2ff;
+  scale: 1.01;
 }
