@@ -37,20 +37,12 @@ fetch(url)
       let mediaHTML;
 
       if (image.endsWith(".mp4")) {
-        const seconds = r.c[2].v; // เวลาในวินาทีจาก Sheet
-        mediaHTML = `<video controls width="100%" style="border-radius:15px" preload="none"></video>`;
-        
-        const videoEl = document.createElement('video');
-        videoEl.src = image;
-        videoEl.crossOrigin = "anonymous";
-        videoEl.currentTime = seconds;
-        videoEl.addEventListener('loadeddata', () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = videoEl.videoWidth;
-          canvas.height = videoEl.videoHeight;
-          canvas.getContext('2d').drawImage(videoEl,0,0,canvas.width,canvas.height);
-          videoEl.poster = canvas.toDataURL('image/png'); // ใส่ poster จาก frame
-        });
+        // กรณีวิดีโอ
+        mediaHTML = `
+          <video controls width="100%" style="border-radius:15px" poster="${r.c[2].v}">
+            <source src="${image}" type="video/mp4">
+          </video>
+        `;
       } else if (r.c[1]) {
         mediaHTML = `
           <a href="${r.c[1].v}">
