@@ -22,7 +22,7 @@ fetch(url)
       const image = r.c[0].v;
       const caption = r.c[r.c.length-1].v;
 
-      const catColumns = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+      const catColumns = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
       const allCats = catColumns.flatMap(i => {
         const val = r.c[i] ? r.c[i].v : "";
         return val && val !== "-" ? val : [];
@@ -37,12 +37,20 @@ fetch(url)
       let mediaHTML;
 
       if (image.endsWith(".mp4")) {
-        // กรณีวิดีโอ
-        mediaHTML = `
-          <video controls width="100%" style="border-radius:15px">
-            <source src="${image}" type="video/mp4">
-          </video>
-        `;
+        const seconds = r.c[2].v; // เวลาในวินาทีจาก Sheet
+        mediaHTML = `<video controls width="100%" style="border-radius:15px" preload="none"></video>`;
+        
+        const videoEl = document.createElement('video');
+        videoEl.src = image;
+        videoEl.crossOrigin = "anonymous";
+        videoEl.currentTime = seconds;
+        videoEl.addEventListener('loadeddata', () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = videoEl.videoWidth;
+          canvas.height = videoEl.videoHeight;
+          canvas.getContext('2d').drawImage(videoEl,0,0,canvas.width,canvas.height);
+          videoEl.poster = canvas.toDataURL('image/png'); // ใส่ poster จาก frame
+        });
       } else if (r.c[1]) {
         mediaHTML = `
           <a href="${r.c[1].v}">
