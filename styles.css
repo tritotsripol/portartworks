@@ -14,9 +14,11 @@ body {
   background: linear-gradient(to right, #00de75, #00c9fd);
   padding: 5px;
   padding-left: 25px;
+  padding-right: 25px;
   color: white;
   font-size: 36px;
   line-height: 15px;
+  z-index: 10;
 }
 .header > div {
   display: flex;
@@ -40,16 +42,58 @@ a:hover {
   flex: 1;
   margin: 10px;
 }
-.filter {
-  display: flex;
-  flex-wrap: wrap;
+.dropdown-btn {
   background: linear-gradient(to right, #00de75, #00c9fd);
+  padding: 15px;
+  border-radius: 25px;
+  color: white;
+  font-size: 20px;
+  gap: 10px;
+  display:flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+  border: none;
+  width:max-content;
+  position: relative;
+}
+.dropdown-btn::before {
+  background-color: white;
+  border-radius: 20px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  opacity: 25%;
+}
+.dropdown-btn:hover::before {
+  width: 90%;
+  height: 75%;
+}
+.filter {
+  transition: transform 0.5s ease, box-shadow 0.5s ease; 
+  background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
+  transform: translateY(-500px);
+  position: absolute;
   padding: 15px;
   justify-content: center;
   border-radius: 25px;
   color: white;
   font-size: 20px;
   gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+}
+.filter.show {
+  box-shadow: 10px 10px 10px #008caf40;
+  transform: translateY(0px);
+  background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
+  backdrop-filter: blur(5px);
 }
 .checkbox {
   width: fit-content;
@@ -155,7 +199,7 @@ body::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #00de7580, #00c9fd80);
 }
 body::-webkit-scrollbar-track {
-  background-color: rgba(#fff0);
+  opacity: 0;
 }
 
 
@@ -166,6 +210,7 @@ body::-webkit-scrollbar-track {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5px;
+  z-index: 11;
 }
 .gotop, .themebtn {
   width: 4em;

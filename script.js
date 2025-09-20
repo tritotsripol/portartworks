@@ -6,6 +6,16 @@ gotop.addEventListener('click',function() {
   });
 });
 
+// dropdown
+const btn = document.getElementById("dropdownBtn");
+const filterBox = document.getElementById("filter");
+
+btn.addEventListener("click", () => {
+  filterBox.classList.toggle("show");
+});
+
+
+// gallery
 const sheetID = "17lmRDtyNAAO5by06d3jujobKKpe4M11qxwziiXNPwqs"; 
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
 
@@ -67,7 +77,7 @@ fetch(url)
       gallery.appendChild(div);
     });
 
-    // --- Filter checkboxes ---
+    // --- Filter checkboxes ---//
     const filterDiv = document.getElementById("filter");
     Array.from(allCategorySet).sort().forEach(cat => {
       const label = document.createElement("label");
@@ -81,6 +91,7 @@ fetch(url)
     });
 
     const checkboxes = document.querySelectorAll("#filter input[type=checkbox]");
+
     function filterGallery() {
       const selected = Array.from(checkboxes)
         .filter(cb => cb.checked)

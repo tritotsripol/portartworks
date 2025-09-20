@@ -17,11 +17,21 @@
 <section class="header">
     <h1>ผลงานออกแบบ</h1>
     <p style="font-size: 24px">จัดทำโดย: ไตรทศ ศรีพล</p> 
-    <p style="font-size: 16px">( หากรูปภาพหรือวิดีโอไม่โหลด กรุณารอสักครู่ หรือคลิก Refresh ⟳ )</p>
+    <p style="font-size: 16px">( หากรูปภาพหรือวิดีโอไม่โหลด รอสักครู่ หรือ Refresh ⟳ )</p>
 </section>
 
 <section class="web">
-  <div id="filter" class="filter"></div>
+
+  <div class="dropdown">
+    <button id="dropdownBtn" class="dropdown-btn">
+      <section style="display: grid; grid-template-columns: repeat(2, max-content); gap: 10px;">
+        <div>ฟิลเตอร์ค้นหา</div>
+        <div><img src="filter-icon.png" width="25" height="25"></div>
+      </section>
+    </button>
+    <div id="filter" class="filter"></div>
+  </div>
+
   <div class="gallery" id="gallery"></div>
   <div id="no-result" style="display:none;"></div>
 </section>
