@@ -43,6 +43,7 @@ a:hover {
   margin: 10px;
 }
 .dropdown-btn {
+  font-family: 'IBM Plex Sans Thai Looped', sans-serif;
   background: linear-gradient(to right, #00de75, #00c9fd);
   padding: 15px;
   border-radius: 25px;
@@ -75,7 +76,7 @@ a:hover {
 .filter {
   transition: transform 0.5s ease, box-shadow 0.5s ease; 
   background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
-  transform: translateY(-500px);
+  transform: translateY(-1000px);
   position: absolute;
   padding: 15px;
   justify-content: center;
@@ -86,6 +87,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  margin-right: 10px;
   z-index: 1;
   backdrop-filter: blur(5px);
 }
@@ -219,8 +221,9 @@ body::-webkit-scrollbar-track {
   border: none;
   cursor: pointer;
   transform: scale(1);
-  background: linear-gradient(to right, #00de75, #00c9fd);
+  background: linear-gradient(to right, #00de75cc, #00c9fdcc);
   transition: transform 0.25s ease;
+  backdrop-filter: blur(5px);
 }
 .gotop:hover, .themebtn:hover {
   transform: scale(1.125);
