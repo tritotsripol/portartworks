@@ -32,7 +32,7 @@ fetch(url)
       const image = r.c[0].v;
       const caption = r.c[r.c.length-1].v;
 
-      const catColumns = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+      const catColumns = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
       const allCats = catColumns.flatMap(i => {
         const val = r.c[i] ? r.c[i].v : "";
         return val && val !== "-" ? val : [];
@@ -46,10 +46,10 @@ fetch(url)
 
       let mediaHTML;
 
-      if (image.endsWith(".mp4")) {
+      if (image.endsWith(".mp4")||image.endsWith(".mkv")) {
         // กรณีวิดีโอ
         mediaHTML = `
-          <video controls width="100%" style="border-radius:15px" poster="${r.c[2].v}">
+          <video controls width="100%" style="border-radius:15px">
             <source src="${image}" type="video/mp4">
           </video>
         `;
@@ -70,14 +70,15 @@ fetch(url)
         <a href="${image}" data-fancybox="gallery">
           ${mediaHTML}
         </a><br>
-        ${allCats.map(cat => {
+        ${allCats
+          .slice()
+          .sort((a, b) => a.localeCompare(b, "th"))
+          .map(cat => {
             let className = 'cat'; 
 
-            if (cat.startsWith('@') || cat.startsWith('#')) {
-                className = 'cat-athash';  
-            } else if (/^[\u0E00-\u0E7F]/.test(cat)) {
-                className = 'cat-thai';  
-            } 
+            if (cat.startsWith('@')) { className = 'cat-at'; }
+            else if (cat.startsWith('#')) { className = 'cat-hash'; }
+            else if (/^[\u0E00-\u0E7F]/.test(cat)) { className = 'cat-thai';}
 
             return `<small class="${className}">${cat}</small>`;
         }).join("&nbsp;&nbsp;")}
