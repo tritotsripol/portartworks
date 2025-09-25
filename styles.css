@@ -185,6 +185,24 @@ label:hover {
   margin-top: 10px;
   transition: background 0.25s ease;
 }
+.cat-athash {
+  background: linear-gradient(to right, #008ffd, #0037fd);
+  padding: 5px;
+  border-radius: 25px;
+  color: white;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.25s ease;
+}
+.cat-thai {
+  background: linear-gradient(to right, #1200b6, #6900fd);
+  padding: 5px;
+  border-radius: 25px;
+  color: white;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.25s ease;
+}
 .noresult {
   margin-top: 25px;
   text-align: center;

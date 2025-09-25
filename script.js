@@ -70,7 +70,17 @@ fetch(url)
         <a href="${image}" data-fancybox="gallery">
           ${mediaHTML}
         </a><br>
-        ${allCats.map(cat => `<small class="cat">${cat}</small>`).join("&nbsp;&nbsp;")}
+        ${allCats.map(cat => {
+            let className = 'cat'; 
+
+            if (cat.startsWith('@') || cat.startsWith('#')) {
+                className = 'cat-athash';  
+            } else if (/^[\u0E00-\u0E7F]/.test(cat)) {
+                className = 'cat-thai';  
+            } 
+
+            return `<small class="${className}">${cat}</small>`;
+        }).join("&nbsp;&nbsp;")}
         <p class="caption">${caption}</p>
       `;
 
