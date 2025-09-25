@@ -49,7 +49,7 @@ fetch(url)
       if (image.endsWith(".mp4")||image.endsWith(".mkv")) {
         // กรณีวิดีโอ
         mediaHTML = `
-          <video controls width="100%" style="border-radius:15px">
+          <video controls width="100%" style="border-radius:15px" poster="${r.c[2] ? r.c[2].v : ''}">
             <source src="${image}" type="video/mp4">
           </video>
         `;
