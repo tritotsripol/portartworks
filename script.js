@@ -99,7 +99,7 @@ fetch(url)
       } else {
         // กรณีรูปภาพ
         mediaHTML = `
-          <img src="${image}" style="border-radius:15px; loading="lazy"">
+          <img src="${image}" style="border-radius:15px; loading="lazy">
         `;
       }
       
