@@ -1,7 +1,7 @@
 body { 
   font-family: 'IBM Plex Sans Thai Looped';
   margin: 0px;
-  background-color: #f5ffff;
+  background-color: #e2ffff;
   color: #00512b;
   overflow-y: auto;
   display: flex;
@@ -10,15 +10,21 @@ body {
   justify-items: center;
   caret-color: transparent;
 }
-.header {
+.header, .footer {
   background: linear-gradient(to right, #00de75, #00c9fd);
-  padding: 5px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 25px;
   color: white;
   font-size: 36px;
   line-height: 15px;
   z-index: 10;
+}
+.header {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.footer {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 .header > div {
   display: flex;
@@ -42,11 +48,43 @@ a:hover {
   flex: 1;
   margin: 10px;
 }
+.tabs-w {
+  position: relative;
+  overflow: hidden;
+}
+.tabs {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 5px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  z-index: 1;
+}
+.tabs::-webkit-mask-image{ background-color: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
+.tabs::-webkit-mask-repeat { background: no-repeat; }
+.tabs::-webkit-mask-size{ background-size: 100% 100%; }
+.tabs::-webkit-scrollbar { 
+  opacity: 0; 
+  height: 0;
+}
+.tabs > div:not(:first-child) {
+  background: linear-gradient(to right, #00de75, #00c9fd);
+  padding:10px;
+  border-radius: 15px;
+  color: white;
+  font-size: 20px;
+  margin-left: 3px;
+  white-space: nowrap;
+  width:max-content;
+  height: 20px;
+  line-height: 20px;
+}
 .dropdown-btn {
   font-family: 'IBM Plex Sans Thai Looped', sans-serif;
   background: linear-gradient(to right, #00de75, #00c9fd);
-  padding: 15px;
-  border-radius: 25px;
+  padding:10px;
+  border-radius: 15px;
   color: white;
   font-size: 20px;
   gap: 10px;
@@ -56,6 +94,8 @@ a:hover {
   border: none;
   width:max-content;
   position: relative;
+  z-index: 1;
+  line-height: 20px;
 }
 .dropdown-btn::before {
   background-color: white;
@@ -88,14 +128,14 @@ a:hover {
   flex-wrap: wrap;
   margin-top: 10px;
   margin-right: 10px;
-  z-index: 1;
+  z-index: 10;
   backdrop-filter: blur(5px);
 }
 .filter.show {
-  box-shadow: 10px 10px 10px #008caf40;
-  transform: translateY(0px);
+  box-shadow: 5px 5px 5px #00ccff40;
+  transform: translateY(40px);
   background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
 }
 .checkbox {
   width: fit-content;
@@ -133,7 +173,7 @@ a:hover {
   width: 10px;
   height: 10px;
 }
-label {
+.label, .label-hili {
   background-color: #ffffff00;
   padding: 5px;
   border-radius: 15px;
@@ -141,8 +181,15 @@ label {
   cursor: pointer;
   transition: transform 0.25s ease, background-color 0.25s ease;
 }
-label:hover {
+.label:hover {
   background-color: #ffffff50;
+  transform: scale(1.1);
+}
+.label-hili {
+  color: yellow;
+}
+.label-hili:hover {
+  background-color: #ffff8050;
   transform: scale(1.1);
 }
 
@@ -153,21 +200,38 @@ label:hover {
   column-count: 4;
   column-gap: 10px;
   }
-.item { 
-  border: 1px solid #00de7580; 
+.item, .item.star {
   border-radius: 25px;
   padding: 10px;
   break-inside: avoid;
   margin-bottom: 10px;
-  color: #00512b;
+  box-shadow: 5px 5px 5px #008bad00;
   scale: 1;
-  transition: border 0.25s ease, color 0.25s ease, scale 0.25s ease;
+  transition: box-shadow 0.25s ease, border 0.25s ease, color 0.25s ease, scale 0.25s ease, background-color 0.25s ease;
+}
+.item {
+  border: 1px solid #00de7580; 
+  color: #00512b;
+}
+.item.star {
+  background-color: #ffff0000;
+  border: 1px solid #ffc55b; 
+  color: #6c3d00;
 }
 .item:hover {
   border: 1px solid #00c9fd80;
   color: #006781;
   scale: 1.01;
+  box-shadow: 5px 5px 5px #00ccff20;
 }
+.item.star:hover{
+  background-color: #ffff0020;
+  border: 1px solid #ffc55b;
+  color: #6c3d00;
+  scale: 1.01;
+  box-shadow: 5px 5px 5px #ffff0020;
+}
+
 .item img { 
   display: block; 
   border-radius: 15px;
@@ -178,40 +242,30 @@ label:hover {
 }
 .cat {
   background: linear-gradient(to right, #00de75, #00c9fd);
-  padding: 5px;
-  border-radius: 25px;
-  color: white;
-  display: inline-block;
-  margin-top: 10px;
-  transition: background 0.25s ease;
 }
 .cat-at {
   background: linear-gradient(to right, #008ffd, #0037fd);
-  padding: 5px;
-  border-radius: 25px;
-  color: white;
-  display: inline-block;
-  margin-top: 10px;
-  transition: background 0.25s ease;
 }
 .cat-hash {
-  background: linear-gradient(to right, #1200b6, #6900fd);
-  padding: 5px;
-  border-radius: 25px;
-  color: white;
-  display: inline-block;
-  margin-top: 10px;
-  transition: background 0.25s ease;
+  background: linear-gradient(to right, #4133bc, #8e3eff);
 }
 .cat-thai {
-  background: linear-gradient(to right, #df00fd, #fd00b5);
+  background: linear-gradient(to right, #fd00b5, #b000c7);
+}
+.cat-hili {
+  background: linear-gradient(to right, #e68200, #fca704);
+  font-weight: bold;
+}
+.cat, .cat-at, .cat-hash, .cat-thai, .cat-hili {
   padding: 5px;
-  border-radius: 25px;
+  line-height: 15px;
+  border-radius: 10px;
   color: white;
   display: inline-block;
   margin-top: 10px;
   transition: background 0.25s ease;
 }
+
 .noresult {
   margin-top: 25px;
   text-align: center;
@@ -223,11 +277,13 @@ label:hover {
 
 body::-webkit-scrollbar {
   width: 15px;
+  scroll-behavior: smooth;
 }
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb{
   background: linear-gradient(to bottom, #00de7580, #00c9fd80);
+  border-radius: 15px;
 }
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track{
   opacity: 0;
 }
 
@@ -302,7 +358,7 @@ body::-webkit-scrollbar-track {
 }
 
 body.dark { 
-  background-color: #080b0b;
+  background-color: #101515;
 }
 body.dark .item { 
   border: 1px solid #00de7580; 
@@ -315,4 +371,11 @@ body.dark .item:hover {
   border: 1px solid #00c9fd80;
   color: #bdf2ff;
   scale: 1.01;
+}
+body.dark .item.star, body.dark .item.star:hover {
+  border: 1px solid #895900; 
+  color: #fffac5;
+}
+body.dark .item.star:hover {
+  background-color: #ffff0010;
 }

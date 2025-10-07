@@ -14,6 +14,44 @@ btn.addEventListener("click", () => {
   filterBox.classList.toggle("show");
 });
 
+//scroll hori
+const tabs = document.querySelector('.tabs');
+
+tabs.addEventListener('wheel', (e) => {
+  if (e.target.closest('.filter')) return;
+
+  e.preventDefault(); 
+  tabs.scrollLeft += e.deltaY;
+});
+
+const tabsid = document.getElementById("tabs");
+
+tabsid.addEventListener("scroll", updateMask);
+window.addEventListener("resize", updateMask); // รีเฟรช mask เมื่อหน้าจอเปลี่ยน
+
+function updateMask() {
+  const maxScroll = tabsid.scrollWidth - tabsid.clientWidth;
+  const scroll = tabsid.scrollLeft;
+
+  // ถ้าไม่ scrollable → เอา mask ออก
+  if (tabsid.scrollWidth <= tabsid.clientWidth) {
+    tabsid.style.webkitMaskImage = "none";
+    return;
+  }
+
+  // คำนวณจุด fade dynamic
+  const leftPercent = scroll === 0 ? 0 : 10;
+  const rightPercent = scroll >= maxScroll ? 0 : 10;
+
+  tabsid.style.webkitMaskImage = `linear-gradient(to right, transparent 0%, black ${leftPercent}%, black ${100 - rightPercent}%, transparent 100%)`;
+}
+
+// เรียกครั้งแรกตอนโหลด
+updateMask();
+
+
+
+
 
 // gallery
 const sheetID = "17lmRDtyNAAO5by06d3jujobKKpe4M11qxwziiXNPwqs"; 
@@ -56,32 +94,46 @@ fetch(url)
       } else if (r.c[1]) {
         mediaHTML = `
           <a href="${r.c[1].v}">
-            <img src="${image}" style="border-radius:15px">
-          </a>
+            <img src="${image}" style="border-radius:15px"></a>
         `
       } else {
         // กรณีรูปภาพ
         mediaHTML = `
-          <img src="${image}" style="border-radius:15px">
+          <img src="${image}" style="border-radius:15px;">
         `;
       }
       
       div.innerHTML = `
         <a href="${image}" data-fancybox="gallery">
-          ${mediaHTML}
-        </a><br>
+          ${mediaHTML}</a>
+
         ${allCats
           .slice()
-          .sort((a, b) => a.localeCompare(b, "th"))
-          .map(cat => {
-            let className = 'cat'; 
+          .sort((a, b) => {
 
-            if (cat.startsWith('@')) { className = 'cat-at'; }
-            else if (cat.startsWith('#')) { className = 'cat-hash'; }
-            else if (/^[\u0E00-\u0E7F]/.test(cat)) { className = 'cat-thai';}
+            const getPriority = cat => {
+              if (cat.startsWith('★')) return 1;        // กลุ่มพิเศษ
+              if (/^[A-Za-z]/.test(cat)) return 2;      // ภาษาอังกฤษ
+              if (/^[\u0E00-\u0E7F]/.test(cat)) return 3; // ภาษาไทย
+              if (cat.startsWith('@')) return 4;        // @
+              if (cat.startsWith('#')) return 5;        // #
+            };
+
+            const pa = getPriority(a);
+            const pb = getPriority(b);
+            if (pa !== pb) return pa - pb; // ถ้าอยู่คนละกลุ่ม เรียงตาม priority
+            return a.localeCompare(b, "th"); // ถ้าอยู่กลุ่มเดียวกัน เรียงตามตัวอักษร
+          })
+          .map(cat => {
+            let className = 'cat';
+            if (cat.startsWith('@')) className = 'cat-at';
+            else if (cat.startsWith('#')) className = 'cat-hash';
+            else if (cat.startsWith('★')) className = 'cat-hili';
+            else if (/^[\u0E00-\u0E7F]/.test(cat)) className = 'cat-thai';
 
             return `<small class="${className}">${cat}</small>`;
-        }).join("&nbsp;&nbsp;")}
+          })
+          .join("&nbsp;")}
         <p class="caption">${caption}</p>
       `;
 
@@ -90,25 +142,56 @@ fetch(url)
 
     // --- Filter checkboxes ---//
     const filterDiv = document.getElementById("filter");
-    Array.from(allCategorySet).sort().forEach(cat => {
-      const label = document.createElement("label");
-      label.innerHTML = `
-        <input type="checkbox" value="${cat}">
-        <span class="checkmark"></span> 
-        ${cat}
-      `;
-      label.classList.add("checkbox");
-      filterDiv.appendChild(label);
-    });
+    const getPriority = cat => {
+      if (cat.startsWith('★')) return 1;              // ★ มาก่อนสุด
+      if (/^[A-Za-z]/.test(cat)) return 2;            // ภาษาอังกฤษ
+      if (/^[\u0E00-\u0E7F]/.test(cat)) return 3;     // ภาษาไทย
+      if (cat.startsWith('@')) return 4;              // @ ถัดมา
+      if (cat.startsWith('#')) return 5;              // # ท้ายสุด
+    };
+    
+    Array.from(allCategorySet)
+      .sort((a, b) => {
+        const pa = getPriority(a);
+        const pb = getPriority(b);
+        if (pa !== pb) return pa - pb;                // เรียงตามกลุ่ม
+        return a.localeCompare(b, "th");              // เรียงตามตัวอักษรภายในกลุ่ม
+      })
+      .forEach(cat => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+          <input type="checkbox" value="${cat}">
+          <span class="checkmark"></span> 
+          ${cat}
+        `;
+
+        let className;
+        if (cat.startsWith('★')) className = 'label-hili';
+        else className = 'label';
+
+        label.classList.add(className);
+        label.classList.add("checkbox");
+        filterDiv.appendChild(label);
+      });
 
     const checkboxes = document.querySelectorAll("#filter input[type=checkbox]");
 
+    // --- Filter gallery ---//
+    const items = Array.from(document.querySelectorAll(".item"));
+
+
+    items.forEach(item => {
+      const itemCats = item.getAttribute("data-cat").split("|").map(s => s.trim());
+      if (itemCats.some(cat => cat.startsWith('★'))) {
+        item.classList.add('star'); // สีเหลือง / ไฮไลต์ปรากฏทันที
+      }
+    });
+    
     function filterGallery() {
       const selected = Array.from(checkboxes)
         .filter(cb => cb.checked)
         .map(cb => cb.value.trim());
 
-      const items = document.querySelectorAll(".item");
       let anyVisible = false;
 
       items.forEach(item => {
@@ -148,7 +231,6 @@ fetch(url)
     });
 
   });
-
 
   // theme
 const themeToggleButton = document.getElementById('theme-toggle');
