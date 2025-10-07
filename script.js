@@ -88,18 +88,18 @@ fetch(url)
         // กรณีวิดีโอ
         mediaHTML = `
           <video controls width="100%" style="border-radius:15px" poster="${r.c[2] ? r.c[2].v : ''}">
-            <source src="${image}" type="video/mp4">
+            <source src="${image}" type="video/mp4" loading="lazy">
           </video>
         `;
       } else if (r.c[1]) {
         mediaHTML = `
           <a href="${r.c[1].v}">
-            <img src="${image}" style="border-radius:15px"></a>
+            <img src="${image}" style="border-radius:15px" loading="lazy"></a>
         `
       } else {
         // กรณีรูปภาพ
         mediaHTML = `
-          <img src="${image}" style="border-radius:15px;">
+          <img src="${image}" style="border-radius:15px; loading="lazy"">
         `;
       }
       
