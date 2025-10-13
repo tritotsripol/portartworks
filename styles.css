@@ -99,7 +99,7 @@ a:hover {
 }
 .dropdown-btn::before {
   background-color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   content: "";
   position: absolute;
   top: 50%;
@@ -237,6 +237,10 @@ a:hover {
   border-radius: 15px;
   width: 100%;
 }
+.fancybox__image {
+  border-radius: 15px;
+  box-shadow: 0 0 50px #00000080;
+}
 .caption {
   font-size: 18px;
 }
@@ -331,7 +335,6 @@ body::-webkit-scrollbar-track{
 .uppy, .themeicon{
   filter: invert(1);
 }
-
 
 @media (max-width: 768px) {
   .gallery { 

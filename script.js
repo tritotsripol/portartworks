@@ -216,20 +216,19 @@ fetch(url)
 
     Fancybox.bind('[data-fancybox="gallery"]', {
       Thumbs: {
-        autoStart: false   // ไม่เปิด thumbnail อัตโนมัติ
+        autoStart: false   
       },
       Toolbar: {
-        display: ["zoom", "close"] // toolbar เรียบง่าย
+        display: ["zoom", "close"] 
       },
-      animated: false,      // ปิด animation
+      animated: true,     
       Carousel: {
-        preload: 1,          // โหลดแค่ 1 รูปล่วงหน้า
+        preload: 1,          
         friction: 0.9
       },
       dragToClose: true,
       infinite: true
     });
-
   });
 
   // theme
