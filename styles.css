@@ -99,7 +99,7 @@ a:hover {
 }
 .dropdown-btn::before {
   background-color: white;
-  border-radius: 20px;
+  border-radius: 15px;
   content: "";
   position: absolute;
   top: 50%;
