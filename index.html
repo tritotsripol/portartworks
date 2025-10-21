@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 <script src="script.js" defer></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 </head>
 <body>
@@ -32,13 +33,13 @@
           </section>
         </button>
       </div>  
-      <div class="tab" style="background: linear-gradient(to right, #e68200, #fca704); font-weight: bold;">★ : 19</div>
-      <div class="tab">Ps : 22</div>
-      <div class="tab">Ai : 31</div>
-      <div class="tab">Ae : 3</div>
-      <div class="tab">Bld : 7</div>
-      <div class="tab">Cnv : 5</div>
-      <div class="tab">HCJ : 1</div>
+      <div class="tab" id="★" style="background: linear-gradient(to right, #e68200, #fca704); font-weight: bold;"></div>
+      <div class="tab" id="Ps"></div>
+      <div class="tab" id="Ai"></div>
+      <div class="tab" id="Ae"></div>
+      <div class="tab" id="Bld"></div>
+      <div class="tab" id="Cnv"></div>
+      <div class="tab" id="HCJ"></div>
     </section>
   </section>
       <div id="filter" class="filter"></div>
@@ -57,6 +58,14 @@
 
 <section class="buttons">
   <div>
+    <button class="word">
+      <span id="des">DES</span>
+  </div>
+  <div>
+    <button class="word">
+      <span id="kat">CAT</span>
+  </div>
+  <div>
     <button class="themebtn" id="theme-toggle">
       <img class="themeicon" id="theme-icon" src="moon-icon.png" alt="Theme Icon" width="30" height="30">
     </button>
@@ -65,7 +74,7 @@
     <button class="gotop">
       <img src="up-icon.png" width="25" height="25" class="uppy">
     </button>
-  </div>
+  </div>  
 </section>
 
 </body>

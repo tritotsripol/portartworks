@@ -76,9 +76,13 @@ a:hover {
   font-size: 20px;
   margin-left: 3px;
   white-space: nowrap;
-  width:max-content;
   height: 20px;
   line-height: 20px;
+  transition: padding 0.5s ease;
+}
+.tabs > div:not(:first-child):hover {
+  padding-left: 25px;
+  padding-right: 25px;
 }
 .dropdown-btn {
   font-family: 'IBM Plex Sans Thai Looped', sans-serif;
@@ -99,19 +103,20 @@ a:hover {
 }
 .dropdown-btn::before {
   background-color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease;
   width: 0px;
   height: 0px;
-  opacity: 25%;
+  opacity: 50%;
 }
 .dropdown-btn:hover::before {
-  width: 90%;
-  height: 75%;
+  width: 100%;
+  height: 100%;
 }
 .filter {
   transition: transform 0.5s ease, box-shadow 0.5s ease; 
@@ -132,7 +137,7 @@ a:hover {
   backdrop-filter: blur(5px);
 }
 .filter.show {
-  box-shadow: 5px 5px 5px #00ccff40;
+  box-shadow: 0px 0px 10px #00ccff80;
   transform: translateY(40px);
   background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
   backdrop-filter: blur(2px);
@@ -174,7 +179,6 @@ a:hover {
   height: 10px;
 }
 .label, .label-hili {
-  background-color: #ffffff00;
   padding: 5px;
   border-radius: 15px;
   size: 1;
@@ -182,14 +186,12 @@ a:hover {
   transition: transform 0.25s ease, background-color 0.25s ease;
 }
 .label:hover {
-  background-color: #ffffff50;
   transform: scale(1.1);
 }
 .label-hili {
   color: yellow;
 }
 .label-hili:hover {
-  background-color: #ffff8050;
   transform: scale(1.1);
 }
 
@@ -214,7 +216,6 @@ a:hover {
   color: #00512b;
 }
 .item.star {
-  background-color: #ffff0000;
   border: 1px solid #ffc55b; 
   color: #6c3d00;
 }
@@ -222,14 +223,13 @@ a:hover {
   border: 1px solid #00c9fd80;
   color: #006781;
   scale: 1.01;
-  box-shadow: 5px 5px 5px #00ccff20;
+  box-shadow: 0 0 10px #00ccff40;
 }
 .item.star:hover{
-  background-color: #ffff0020;
   border: 1px solid #ffc55b;
   color: #6c3d00;
   scale: 1.01;
-  box-shadow: 5px 5px 5px #ffff0020;
+  box-shadow: 0 0 10px #ffff0040;
 }
 
 .item img { 
@@ -243,21 +243,27 @@ a:hover {
 }
 .caption {
   font-size: 18px;
+  margin-top: 5px;
 }
 .cat {
   background: linear-gradient(to right, #00de75, #00c9fd);
+  margin-right: 5px;
 }
 .cat-at {
   background: linear-gradient(to right, #008ffd, #0037fd);
+  margin-right: 5px;
 }
 .cat-hash {
   background: linear-gradient(to right, #4133bc, #8e3eff);
+  margin-right: 5px;
 }
 .cat-thai {
   background: linear-gradient(to right, #fd00b5, #b000c7);
+  margin-right: 5px;
 }
 .cat-hili {
   background: linear-gradient(to right, #e68200, #fca704);
+  margin-right: 5px;
   font-weight: bold;
 }
 .cat, .cat-at, .cat-hash, .cat-thai, .cat-hili {
@@ -297,40 +303,48 @@ body::-webkit-scrollbar-track{
   bottom: 10px;
   right: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 5px;
   z-index: 11;
 }
-.gotop, .themebtn {
+.gotop, .themebtn, .word {
   width: 4em;
   height: 4em;
   border-radius: 15px;
   border: none;
   cursor: pointer;
   transform: scale(1);
-  background: linear-gradient(to right, #00de75cc, #00c9fdcc);
+  background: linear-gradient(to right, #00de75bf, #00c9fdbf);
   transition: transform 0.25s ease;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(1px);
+  padding: 0;
 }
-.gotop:hover, .themebtn:hover {
+.word > span {
+  color: white;
+  font-weight: 100;
+  font-size: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
+}
+.gotop:hover, .themebtn:hover, .word:hover {
   transform: scale(1.125);
 }
-.gotop::before, .themebtn::before {
+.gotop::before, .themebtn::before, .word::before {
   background-color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease;
   width: 0px;
   height: 0px;
-  opacity: 25%;
-  
+  opacity: 50%;
 }
-.gotop:hover::before, .themebtn:hover::before {
-  width: 75%;
-  height: 75%;
+.gotop:hover::before, .themebtn:hover::before,  .word:hover::before {
+  width: 100%;
+  height: 100%;
 }
 .uppy, .themeicon{
   filter: invert(1);
@@ -346,11 +360,8 @@ body::-webkit-scrollbar-track{
   grid-template-rows: repeat(2,25%);
   align-content: center;
   }
-  .header > h1 {
-    line-height: 50px;
-  }
-  .header > p {
-    line-height: 25px;
+  h1 {
+  line-height: 1em;
   }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -378,7 +389,4 @@ body.dark .item:hover {
 body.dark .item.star, body.dark .item.star:hover {
   border: 1px solid #895900; 
   color: #fffac5;
-}
-body.dark .item.star:hover {
-  background-color: #ffff0010;
 }

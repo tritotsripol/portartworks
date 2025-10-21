@@ -50,12 +50,11 @@ function updateMask() {
 updateMask();
 
 
-
-
-
 // gallery
 const sheetID = "17lmRDtyNAAO5by06d3jujobKKpe4M11qxwziiXNPwqs"; 
+const gid = "824983816";
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+const urla = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}`;
 
 fetch(url)
   .then(res => res.text())
@@ -87,26 +86,26 @@ fetch(url)
       if (image.endsWith(".mp4")||image.endsWith(".mkv")) {
         // กรณีวิดีโอ
         mediaHTML = `
-          <video controls width="100%" style="border-radius:15px" poster="${r.c[2] ? r.c[2].v : ''}">
-            <source src="${image}" type="video/mp4" loading="lazy">
-          </video>
+        <video controls width="100%" style="border-radius:15px" poster="${r.c[2] ? r.c[2].v : ''}">
+          <source src="${image}" type="video/mp4" loading="lazy">
+        </video>
         `;
       } else if (r.c[1]) {
         mediaHTML = `
-          <a href="${r.c[1].v}">
-            <img src="${image}" style="border-radius:15px" loading="lazy"></a>
-        `
+        <a href="${r.c[1].v}">
+          <img src="${image}" style="border-radius:15px" loading="lazy">
+        </a>
+        `;
       } else {
         // กรณีรูปภาพ
         mediaHTML = `
-          <img src="${image}" style="border-radius:15px; loading="lazy">
+        <img src="${image}" style="border-radius:15px; loading="lazy";>
         `;
       }
       
       div.innerHTML = `
-        <a href="${image}" data-fancybox="gallery">
-          ${mediaHTML}</a>
-
+      <a href="${image}" data-fancybox="gallery">${mediaHTML}</a>
+        
         ${allCats
           .slice()
           .sort((a, b) => {
@@ -133,8 +132,8 @@ fetch(url)
 
             return `<small class="${className}">${cat}</small>`;
           })
-          .join("&nbsp;")}
-        <p class="caption">${caption}</p>
+          .join("")}
+        <div class="caption">${caption}</div>
       `;
 
       gallery.appendChild(div);
@@ -176,6 +175,26 @@ fetch(url)
 
     const checkboxes = document.querySelectorAll("#filter input[type=checkbox]");
 
+//--openclosecapt--//
+const desBtn = document.querySelector('#des').parentElement;
+const katBtn = document.querySelector('#kat').parentElement;
+
+// กดปุ่ม DES = ซ่อน caption ทั้งหมด
+desBtn.addEventListener('click', () => {
+  const allCaptions = document.querySelectorAll('.caption');
+  allCaptions.forEach(caption => {
+    caption.style.display = caption.style.display === 'none' ? 'block' : 'none';
+  });
+});
+
+// กดปุ่ม CAT = ซ่อน category tags ทั้งหมด
+katBtn.addEventListener('click', () => {
+  const allCats = document.querySelectorAll('.cat, .cat-at, .cat-hash, .cat-hili, .cat-thai');
+  allCats.forEach(cat => {
+    cat.style.display = cat.style.display === 'none' ? 'inline-block' : 'none';
+  });
+});
+    
     // --- Filter gallery ---//
     const items = Array.from(document.querySelectorAll(".item"));
 
@@ -230,6 +249,32 @@ fetch(url)
       infinite: true
     });
   });
+
+fetch(urla)
+  .then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substr(47).slice(0, -2));
+    const rows = json.table.rows;
+
+    const sheetData = {};
+    rows.forEach(row => {
+      const program = row.c[0]?.v;
+      const value = row.c[1]?.v; 
+      if (program) sheetData[program.toLowerCase()] = value; 
+    });
+
+    document.querySelectorAll(".tab:not(:first-child)").forEach(div => {
+      const id = div.id.toLowerCase(); 
+      if (sheetData[id] !== undefined) {
+        div.textContent = `${div.id} : ${sheetData[id]}`;
+      } else {
+        div.textContent = `${div.id} : -`;
+      }
+    });
+  })
+  .catch(err => console.error(err));
+
+
 
   // theme
 const themeToggleButton = document.getElementById('theme-toggle');
