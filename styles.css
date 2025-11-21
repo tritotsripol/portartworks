@@ -212,24 +212,17 @@ a:hover {
   transition: box-shadow 0.25s ease, border 0.25s ease, color 0.25s ease, scale 0.25s ease, background-color 0.25s ease;
 }
 .item {
-  border: 1px solid #00de7580; 
+  background-color:#ffffffb0;
   color: #00512b;
+  box-shadow: 0 3px 5px #0092b640;
 }
 .item.star {
-  border: 1px solid #ffc55b; 
+  background-color:#ffffffb0;
   color: #6c3d00;
+  box-shadow: 0 3px 5px #0092b640;
 }
-.item:hover {
-  border: 1px solid #00c9fd80;
-  color: #006781;
+.item:hover, .item-star:hover {
   scale: 1.01;
-  box-shadow: 0 0 10px #00ccff40;
-}
-.item.star:hover{
-  border: 1px solid #ffc55b;
-  color: #6c3d00;
-  scale: 1.01;
-  box-shadow: 0 0 10px #ffff0040;
 }
 
 .item img { 
@@ -374,19 +367,16 @@ body::-webkit-scrollbar-track{
 body.dark { 
   background-color: #101515;
 }
-body.dark .item { 
-  border: 1px solid #00de7580; 
-  color: #c0ffe8;
-}
 body.dark a { 
   color: rgb(167, 154, 255);
 }
-body.dark .item:hover {
-  border: 1px solid #00c9fd80;
-  color: #bdf2ff;
-  scale: 1.01;
+body.dark .item {
+  background-color:#1a1f1fb0;
+  color: #c0ffe8;
+  box-shadow: 0 3px 5px #00000080;
 }
-body.dark .item.star, body.dark .item.star:hover {
-  border: 1px solid #895900; 
+body.dark .item.star {
+  background-color:#1a1f1fb0;
   color: #fffac5;
+  box-shadow: 0 3px 5px #00000080;
 }
