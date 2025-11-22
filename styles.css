@@ -32,14 +32,6 @@ body {
   gap: 15px;
   flex-wrap: wrap;
 }
-a {
-  color: darkslateblue;
-  font-weight: normal;
-  transition: opacity 0.1s ease, font-weight 0.1s ease;
-}
-a:hover {
-  font-weight: bold; 
-}
 
 
 .web {
@@ -124,23 +116,21 @@ a:hover {
   transform: translateY(-1000px);
   position: absolute;
   padding: 15px;
-  justify-content: center;
-  border-radius: 25px;
+  border-radius: 15px;
   color: white;
   font-size: 20px;
-  gap: 10px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 250px);
+  gap: 5px;
   margin-top: 10px;
   margin-right: 10px;
   z-index: 10;
   backdrop-filter: blur(5px);
 }
 .filter.show {
-  box-shadow: 0px 0px 10px #00ccff80;
   transform: translateY(40px);
   background: linear-gradient(to right, rgba(0, 222, 118, 0.8), rgba(0, 201, 253, 0.8));
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
 }
 .checkbox {
   width: fit-content;
@@ -183,19 +173,15 @@ a:hover {
   border-radius: 15px;
   size: 1;
   cursor: pointer;
-  transition: transform 0.25s ease, background-color 0.25s ease;
-}
-.label:hover {
-  transform: scale(1.1);
+  transition: transform 0.25s ease, font-weight 0.25s ease;
 }
 .label-hili {
   color: yellow;
 }
-.label-hili:hover {
+.label:hover, .label-hili:hover {
   transform: scale(1.1);
+  font-weight: bold;
 }
-
-
 
 .gallery { 
   margin-top: 10px;
@@ -204,7 +190,6 @@ a:hover {
   }
 .item, .item.star {
   border-radius: 25px;
-  padding: 10px;
   break-inside: avoid;
   margin-bottom: 10px;
   box-shadow: 5px 5px 5px #008bad00;
@@ -237,38 +222,65 @@ a:hover {
 .caption {
   font-size: 18px;
   margin-top: 5px;
+  padding: 0 10px 10px 10px;
 }
 .cat {
   background: linear-gradient(to right, #00de75, #00c9fd);
-  margin-right: 5px;
 }
 .cat-at {
   background: linear-gradient(to right, #008ffd, #0037fd);
-  margin-right: 5px;
+
 }
 .cat-hash {
   background: linear-gradient(to right, #4133bc, #8e3eff);
-  margin-right: 5px;
 }
 .cat-thai {
   background: linear-gradient(to right, #fd00b5, #b000c7);
-  margin-right: 5px;
 }
 .cat-hili {
   background: linear-gradient(to right, #e68200, #fca704);
-  margin-right: 5px;
   font-weight: bold;
 }
 .cat, .cat-at, .cat-hash, .cat-thai, .cat-hili {
+  margin: 10px 0 0 10px;
   padding: 5px;
   line-height: 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   display: inline-block;
-  margin-top: 10px;
   transition: background 0.25s ease;
 }
-
+a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+.download {
+  background: linear-gradient(to right, #00de75, #00c9fd); 
+  border-radius: 15px;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
+  position: relative;
+}
+.download::before {
+  background-color: white;
+  border-radius: 15px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease;
+  width: 0px;
+  height: 0px;
+  opacity: 50%;
+  pointer-events: none;
+}
+.download:hover::before {
+  width: 100%;
+  height: 100%;
+}
 .noresult {
   margin-top: 25px;
   text-align: center;
@@ -366,9 +378,6 @@ body::-webkit-scrollbar-track{
 
 body.dark { 
   background-color: #101515;
-}
-body.dark a { 
-  color: rgb(167, 154, 255);
 }
 body.dark .item {
   background-color:#1a1f1fb0;
