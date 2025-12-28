@@ -179,21 +179,45 @@ fetch(url)
 const desBtn = document.querySelector('#des').parentElement;
 const katBtn = document.querySelector('#kat').parentElement;
 
-// กดปุ่ม DES = ซ่อน caption ทั้งหมด
+// ฟังก์ชันอัปเดต padding
+function updatePadding() {
+  const allCaptions = document.querySelectorAll('.caption');
+  const allCats = document.querySelectorAll('.cat, .cat-at, .cat-hash, .cat-hili, .cat-thai');
+  
+  // เช็คว่า caption ทั้งหมดซ่อนหรือไม่
+  const captionsHidden = Array.from(allCaptions).every(el => el.style.display === 'none');
+  // เช็คว่า cat ทั้งหมดแสดงหรือไม่
+  const catsVisible = Array.from(allCats).every(el => el.style.display !== 'none');
+  
+  const items = document.querySelectorAll('.item');
+  
+  if (captionsHidden && catsVisible) {
+    items.forEach(el => el.classList.add('w-pad'));
+  } else {
+    items.forEach(el => el.classList.remove('w-pad'));
+  }
+}
+
+// กดปุ่ม DES
 desBtn.addEventListener('click', () => {
   const allCaptions = document.querySelectorAll('.caption');
   allCaptions.forEach(caption => {
     caption.style.display = caption.style.display === 'none' ? 'block' : 'none';
   });
+  updatePadding(); // อัปเดต padding หลังเปลี่ยน state
 });
 
-// กดปุ่ม CAT = ซ่อน category tags ทั้งหมด
+// กดปุ่ม CAT
 katBtn.addEventListener('click', () => {
   const allCats = document.querySelectorAll('.cat, .cat-at, .cat-hash, .cat-hili, .cat-thai');
   allCats.forEach(cat => {
     cat.style.display = cat.style.display === 'none' ? 'inline-block' : 'none';
   });
+  updatePadding(); // อัปเดต padding หลังเปลี่ยน state
 });
+
+// เรียกครั้งแรกตอน page load
+updatePadding();
     
     // --- Filter gallery ---//
     const items = Array.from(document.querySelectorAll(".item"));
