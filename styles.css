@@ -220,6 +220,7 @@ body.dark::before {
   column-count: 4;
   column-gap: 10px;
   }
+
 .item {
   backdrop-filter: blur(3px);
   border-radius: 25px;
@@ -380,6 +381,7 @@ body::-webkit-scrollbar-track{
   }
   h1 {
   font-size: 56px;
+  line-height: 48px;
   }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
