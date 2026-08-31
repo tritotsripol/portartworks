@@ -44,7 +44,8 @@
             <div><img src="filter-icon.png" width="15" height="15"></div>
           </section>
         </button>
-      </div>  
+      </div>
+      <div style="background: none; box-shadow: none; opacity: 0.5; transition: none; pointer-events: none">|</div> 
       <div class="tab" id="จำนวนผลงาน" style="font-weight: bold;"></div>
       <div class="tab" id="★ ไฮไลท์" style="background: linear-gradient(to right, #e68200, #fca704); font-weight: bold;"></div>
       <div class="tab" id="Photoshop"></div>
@@ -65,29 +66,37 @@
     <div style="display:grid; grid-template-columns: repeat(2, max-content); gap: 10px; align-items: center;">
       <div><img src="gmail-icon.png" width="25" height="25"></div>
       <div style="font-size: 24px">tritotsripol@gmail.com</div>
+    </div><br>
+    <div style="display:grid; grid-template-columns: repeat(2, max-content); gap: 10px; align-items: center;">
+      <div><img src="line-icon.png" width="25" height="25"></div>
+      <div style="font-size: 24px">tritotsripol</div>
     </div>
 </section>
 
 
 <section class="buttons">
   <div>
-    <button class="word">
-      <span id="des">คำอธิบาย</span>
+    <div style="margin-bottom: 5px;">
+      <button class="themebtn" id="theme-toggle">
+        <img class="themeicon" id="theme-icon" src="moon-icon.png" alt="Theme Icon" width="30" height="30">
+      </button>
+    </div>
+    <div>
+      <button class="themebtn">
+        <span id="des">คำอธิบาย</span>
+    </div>
   </div>
   <div>
-    <button class="word">
-      <span id="kat">หมวดหมู่</span>
-  </div>
-  <div>
-    <button class="themebtn" id="theme-toggle">
-      <img class="themeicon" id="theme-icon" src="moon-icon.png" alt="Theme Icon" width="30" height="30">
-    </button>
-  </div>
-  <div>
-    <button class="gotop">
-      <img src="up-icon.png" width="25" height="25" class="uppy">
-    </button>
-  </div>  
+    <div style="margin-bottom: 5px;">
+      <button class="gotop">
+        <img src="up-icon.png" width="25" height="25" class="uppy">
+      </button>
+    </div>
+    <div>
+      <button class="themebtn">
+        <span id="kat">หมวดหมู่</span>
+    </div>
+  </div> 
 </section>
 
 </body>
