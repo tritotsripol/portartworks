@@ -101,6 +101,7 @@ body.dark::before {
   line-height: 20px;
   transition: padding 0.5s ease;
   box-shadow: inset 0 -5px 10px rgba(255, 255, 255, 0.5);
+  opacity: 0.5;
 }
 .tabs > div:not(:first-child):hover {
   padding-left: 25px;
@@ -299,6 +300,14 @@ a {
   opacity: 50%;
   color: #555;
 }
+.lineboarder {
+  opacity: 0.5; 
+  transition: none; 
+  pointer-events: none;
+}
+.lineboarder-2 {
+  color: #00512b;
+}
 
 
 body::-webkit-scrollbar {
@@ -409,4 +418,7 @@ body.dark .item.star {
   background-color:#1a1f1f80;
   color: #fffac5;
   box-shadow: 0 3px 5px #00000080;
+}
+body.dark .lineboarder-2 {
+  color: white;
 }
